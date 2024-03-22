@@ -2,6 +2,15 @@ import { getClientConfig } from "../config/client";
 import { SubmitKey } from "../store/config";
 
 const isApp = !!getClientConfig()?.isApp;
+let startDate = new Date(2023, 2, 1); // 注意月份是从0开始的，所以3月是2
+let now = new Date();
+
+let diff = now.getTime() - startDate.getTime();
+
+let diffInDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+let diffInHours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+let diffInMinutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+let diffInSeconds = Math.floor((diff % (1000 * 60)) / 1000);
 
 const cn = {
   WIP: "该功能仍在开发中……",
@@ -360,7 +369,7 @@ const cn = {
   },
   Store: {
     DefaultTopic: "新的聊天",
-    BotHello: "低价出售gpt4，物美价廉，欢迎加群咨询 812124393 ",
+    BotHello:  `已经运行了${diffInDays}天${diffInHours}小时${diffInMinutes}分钟${diffInSeconds}秒，对客户的期待忠诚从未改变，低价出售gpt4，物美价廉，欢迎加群咨询 812124393 `,
     Error: "出错了，稍后重试吧",
     Prompt: {
       History: (content: string) => "这是历史聊天总结作为前情提要：" + content,

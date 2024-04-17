@@ -150,6 +150,11 @@
   font-weight: bold;
   animation: slide-in ease 0.3s;
 }
+.red-bold-flat-text {
+  color: red; /* 设置文本颜色为红色 */
+  font-weight: bold; /* 设置字体为加粗 */
+  text-shadow: none; /* 确保没有文本阴影，实现扁平化效果 */
+}
 
 .sidebar-sub-title {
   font-size: 12px;

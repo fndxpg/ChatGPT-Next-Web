@@ -10,6 +10,7 @@ import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
 import DeleteIcon from "../icons/delete.svg";
 import MaskIcon from "../icons/mask.svg";
+import QRCodeIcon from "../icons/erweima.svg";
 import PluginIcon from "../icons/plugin.svg";
 import DragIcon from "../icons/drag.svg";
 
@@ -143,6 +144,14 @@ export function SideBar(props: { className?: string }) {
 
   useHotKey();
 
+  const startDate = new Date("2023-05-05");
+  const currentDate = new Date();
+  const timeDiff = currentDate.getTime() - startDate.getTime();
+
+  const diffInDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+  const diffInHours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const diffInMinutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  const diffInSeconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
   return (
     <div
       className={`${styles.sidebar} ${props.className} ${
@@ -158,14 +167,31 @@ export function SideBar(props: { className?: string }) {
           Chat
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Happy New Year!
+           {`已经运行了${diffInDays}天${diffInHours}小时，期待忠诚从未改变。`}
         </div>
+        <div className={`${styles["sidebar-sub-title"]} ${styles["red-bold-flat-text"]}`}>
+           {`服务器即将到期，希望大家能赞助一点绵薄之力。`}
+        </div>
+       
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
+          
         </div>
       </div>
 
       <div className={styles["sidebar-header-bar"]}>
+      <IconButton
+        icon={<QRCodeIcon />} // 假设您有一个QRCodeIcon组件
+        text={shouldNarrow ? undefined : '赞助'}
+        // className={styles["sidebar-bar-button"] }
+        className={`${styles["sidebar-bar-button"]} `}
+        onClick={() => {
+          // 实现点击事件，例如打开一个含有赞助二维码的弹窗
+          //showModalWithQRCode();
+          window.open('https://raw.githubusercontent.com/fndxpg/ChatGPT-Next-Web1/main/public/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240416192605.jpg', '_blank');
+        }}
+        shadow
+      />
         <IconButton
           icon={<MaskIcon />}
           text={shouldNarrow ? undefined : Locale.Mask.Name}
